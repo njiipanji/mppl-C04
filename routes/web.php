@@ -131,7 +131,7 @@ Route::get('/oc/checklist', 'OCController@checklist');
 Route::get('/oc/checklist/{nrp}', 'OCController@showformchecklist');
 
  //Update checklist
-
+Route::post('/oc/checklist', 'OCController@updatechecklist');
 
 // Routing registrasi
  // Show daftar peserta
