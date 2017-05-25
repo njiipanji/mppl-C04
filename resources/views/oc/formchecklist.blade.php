@@ -8,8 +8,10 @@
 	{{-- list pendaftar --}}
 
 	<div class="col s12">
-		<form style="margin-top: 50px;">
+		<form style="margin-top: 50px;" action="/oc/checklist/input" method="post">
+			{{ csrf_field() }}
 			<div class="row">
+				<input type="hidden" name="nrp" value="{{ $nrp }}">
 				<div class="col s10 offset-s1 m4">
 					<div class="card grey lighten-4">
 						<div class="card-content grey-text text-darken-3 center">
@@ -98,7 +100,7 @@
 			</div>
 			<div class="row center" style="margin-top: 50px;">
 				<a href="{{ URL::previous() }}" class="btn waves-effect waves-light red darken-2">Kembali</a>
-				<button type="submit" class="btn waves-effect waves-light">Masukkan</button>
+				<button type="submit" class="btn waves-effect waves-light blue lighten-1">Masukkan</button>
 			</div>
 		</form>
 	</div>
