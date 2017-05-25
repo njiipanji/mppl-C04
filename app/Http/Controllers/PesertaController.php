@@ -13,7 +13,6 @@ use App\Models\Kuesioner;
 use App\Models\KuesionerJawab;
 use App\Models\PA;
 use App\Models\PAJawab;
-use App\Models\Ceklis;
 use Carbon\Carbon;
 use Auth;
 
