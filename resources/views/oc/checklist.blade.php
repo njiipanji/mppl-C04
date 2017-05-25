@@ -4,6 +4,13 @@
 
 @section('title-page', 'Daftar Peserta')
 
+@section('style')
+	#toast-container {
+		top: 20% !important;
+		right: 15% !important;
+	}
+@endsection
+
 @section('content')
 	{{-- list pendaftar --}}
 	<div class="col s12">
@@ -19,39 +26,37 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>511x100xxx</td>
-					<td>Aditya N.</td>
-					<td>1</td>
-					<td>-</td>
-					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>511x100xxx</td>
-					<td>Adinda P.</td>
-					<td>1</td>
-					<td>-</td>
-					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>511x100xxx</td>
-					<td>Ananda Q.</td>
-					<td>2</td>
-					<td>-</td>
-					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td>511x100xxx</td>
-					<td>Bagus N.</td>
-					<td>3</td>
-					<td>-</td>
-					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
-				</tr>
+				@php $nourut = 1; @endphp
+				@foreach($pesertas as $peserta)
+					<tr>
+						<td>{{ $nourut }}</td>
+						<td>{{ $peserta->peserta_nrp }}</td>
+						<td>{{ $peserta->peserta_nama }}</td>
+						<td>{{ $peserta->fk_peserta_kelas }} | {{ $peserta->kelas_nama }}</td>
+						<td>
+							@if($peserta->ceklis_waktu != null)
+								{{ $peserta->ceklis_waktu }}
+							@else
+								Belum ceklis kelengkapan
+							@endif
+						</td>
+						<td>
+							@if($peserta->ceklis_waktu != null)
+								<i class="material-icons blue-text text-blue-1">done</i>
+							@else
+								<a href="/oc/checklist/{{ $peserta->peserta_nrp }}" class="btn waves-effect waves-light">Cek!</a>
+							@endif
+						</td>
+					</tr>
+					@php $nourut++; @endphp
+				@endforeach
 			</tbody>
 		</table>
 	</div>
+@endsection
+
+@section('script')
+	@if (session('sukses'))
+		Materialize.toast('{{ session('sukses') }}', 4000);
+	@endif
 @endsection
