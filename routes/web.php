@@ -27,9 +27,6 @@ Route::get('/peserta/error', function() {
 
 
 // ================== PEMANDU ROUTING ================== //
-// Route::get('admin/profile', function () {
-//     //
-// })->middleware('auth');
 
 // Routing show pengumuman
 Route::get('/pemandu', 'PemanduController@index');
@@ -137,10 +134,10 @@ Route::get('/oc', 'OCController@index');
 Route::get('/oc/checklist', 'OCController@checklist');
 
  // Show form checklist menurut nrp
-Route::get('/oc/checklist/{nrp}', 'OCController@showformchecklist');
+ Route::get('/oc/checklist/{nrp}', 'OCController@showformchecklist');
 
- //Update checklist
-Route::post('/oc/checklist', 'OCController@updatechecklist');
+ //Post checklist
+ Route::post('/oc/checklist/input', 'OCController@inputchecklist');
 
 // Routing registrasi
  // Show daftar peserta
