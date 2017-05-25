@@ -28,7 +28,7 @@
 						@if($peserta->berkas_link == null)
 							<td><i class="material-icons" title="Belum Upload">clear</i></td>
 						@else
-							<td><a href="#!"><i class="material-icons" title="Download Berkas">get_app</i></a></td>
+							<td><a href="{{ url('/'.$peserta->berkas_link) }}"><i class="material-icons" title="Download Berkas">get_app</i></a></td>
 						@endif
 						@if($peserta->peserta_status == 0)
 							<td>Belum Diverifikasi</td>
