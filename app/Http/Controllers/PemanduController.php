@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pengumuman;
+use App\Models\Berkas;
 use App\Models\Kelas;
 use App\Models\Peserta;
 use App\Models\Materi;
@@ -87,6 +88,7 @@ class PemanduController extends Controller
                                 FROM peserta p
                                 LEFT JOIN berkas b
                                 ON b.fk_berkas_peserta = p.peserta_id');
+
         //dd($pesertas);
         return view('pemandu.checklistpendaftar', compact('pesertas'));
     }
