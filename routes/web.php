@@ -128,11 +128,6 @@ Route::get('/pemandu/oc', 'PemanduController@menuoc');
 
 
 
-
-
-
-
-
 // ================== OC ROUTING ================== //
 // Routing halaman OC
 Route::get('/oc', 'OCController@index');
@@ -155,6 +150,8 @@ Route::get('/oc/registrasi', 'OCController@registrasi');
 Route::get('/oc/registrasi/{nrp}', 'OCController@showformregistrasi');
 
  // Update presensi
+
+
 
 
 // ================== PESERTA ================== //
