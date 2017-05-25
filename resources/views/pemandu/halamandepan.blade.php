@@ -4,6 +4,13 @@
 
 @section('title-page', 'Pengumuman')
 
+@section('style')
+	#toast-container {
+		top: 35% !important;
+		right: 20% !important;
+	}
+@endsection
+
 @section('content')
 	<div class="row center">
 		<a class="btn waves-effect waves-light" href="#modaltambah">Tambah</a>
@@ -11,24 +18,6 @@
 
 	{{-- list pengumuman --}}
 	<div class="col s12">
-		@if(Session::has('alert-success'))
-		    <div class="alert alert-success alert-dismissible fade in" role="alert">
-		    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-	            {{ Session::get('alert-success') }}
-	        </div>
-		@endif
-		@if(Session::has('alert-success-delete'))
-		    <div class="alert alert-success alert-dismissible fade in" role="alert">
-		    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-	            {{ Session::get('alert-success-delete') }}
-	        </div>
-		@endif
-		@if(Session::has('alert-success-update'))
-		    <div class="alert alert-success alert-dismissible fade in" role="alert">
-		    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-	            {{ Session::get('alert-success-update') }}
-	        </div>
-		@endif
 		<ul class="collapsible" data-collapsible="accordion">
 			@foreach($pengumumans as $pengumuman)
 				<li>
@@ -80,4 +69,14 @@
 	$('.modal').modal();
 	$('.collapsible').collapsible();
 	$('#textarea_isi').trigger('autoresize');
+	@if(Session::has('alert-success'))
+		Materialize.toast('{{ Session::get('alert-success') }}', 4000);
+            
+	@endif
+	@if(Session::has('alert-success-delete'))
+        Materialize.toast('{{ Session::get('alert-success-delete') }}', 4000);
+	@endif
+	@if(Session::has('alert-success-update'))
+        Materialize.toast('{{ Session::get('alert-success-update') }}', 4000);
+	@endif
 @endsection

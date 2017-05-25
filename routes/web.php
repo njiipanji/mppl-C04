@@ -11,11 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
+Route::get('/', 'LoginController@index');
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+Route::get('/pemandu/error', function() {
+	return view('errorpemandu');
+});
+Route::get('/oc/error', function() {
+	return view('erroroc');
+});
+Route::get('/peserta/error', function() {
+	return view('errorpeserta');
 });
 
+
 // ================== PEMANDU ROUTING ================== //
+// Route::get('admin/profile', function () {
+//     //
+// })->middleware('auth');
 
 // Routing show pengumuman
 Route::get('/pemandu', 'PemanduController@index');
@@ -150,29 +164,36 @@ Route::get('/peserta', 'PesertaController@index');
 
 // Routing menu daftar peserta
  // Show form / informasi sudah terdaftar
-Route::get('/peserta/daftar', 'PesertaController@menudaftar');
+ Route::get('/peserta/daftar', 'PesertaController@menudaftar');
 
  // Update data peserta -> terdaftar
+ Route::post('/peserta/daftar', 'PesertaController@updatedaftar');
 
 // Routing menu berkas
  // Show form upload
-Route::get('/peserta/berkas', 'PesertaController@menuberkas');
+ Route::get('/peserta/berkas', 'PesertaController@menuberkas');
 
  // Upload file berkas
+ Route::post('/peserta/berkas', 'PesertaController@uploadberkas');
+
+ // Reupload berkas
+ Route::put('/peserta/berkas', 'PesertaController@reuploadberkas');
 
 // Routing menu pa/kuesioner
  // Show menu pa kuesioner
-Route::get('/peserta/pakuesioner', 'PesertaController@menupakuesioner');
+ Route::get('/peserta/pakuesioner', 'PesertaController@menupakuesioner');
 
  // Show menu pilih PA
-Route::get('peserta/isipa', 'PesertaController@showpa');
+ Route::get('peserta/pilihpa', 'PesertaController@showpa');
 
  // Show form PA sesuai materi
-Route::get('peserta/isipa/{materi}', 'PesertaController@showformpa');
+ Route::get('peserta/isipa/{id}', 'PesertaController@showformpa');
 
  // Input PA sesuai materi
+ Route::post('peserta/isipa/{id}', 'PesertaController@isipa');
 
  // Show form isi kuesioner
 Route::get('peserta/kuesioner', 'PesertaController@showformkuesioner');
 
  // Input kuesioner
+ Route::post('peserta/kuesioner', 'PesertaController@jawabkuesioner');

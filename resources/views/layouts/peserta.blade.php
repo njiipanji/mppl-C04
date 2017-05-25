@@ -30,11 +30,11 @@
 		<header>
 			{{-- dropdown list --}}
 			<ul id="dropdown_pakuesioner" class="dropdown-content">
-				<li><a href="{{ url('/peserta/isipa') }}">PA</a></li>
+				<li><a href="{{ url('/peserta/pilihpa') }}">PA</a></li>
 				<li><a href="{{ url('/peserta/kuesioner') }}">Kuesioner</a></li>
 			</ul>
 			<ul id="dropdown_profile" class="dropdown-content">
-				<li><a href="{{ url('/') }}">Logout</a></li>
+				<li><a href="{{ url('/logout') }}">Logout</a></li>
 			</ul>
 
 			{{-- navbar --}}
@@ -47,11 +47,11 @@
 
 						{{-- Opened menu -> ini dimunculin ketika sudah daftar --}}
 						<li class="{{ Request::is('peserta/berkas') ? 'active' : 'no' }}"><a class="grey-text text-darken-3" href="{{ url('/peserta/berkas') }}">Berkas</a></li>
-						<li class="{{ Request::is('/peserta/pakuesioner','/peserta/isipa','/peserta/kuesioner') ? 'active' : 'no' }}"><a class="dropdown-button grey-text text-darken-3" href="#!" data-activates="dropdown_pakuesioner">PA/Kuesioner<i class="material-icons right">arrow_drop_down</i></a></li>
+						<li class="{{ Request::is('/peserta/pakuesioner','/peserta/pilihpa','/peserta/kuesioner') ? 'active' : 'no' }}"><a class="dropdown-button grey-text text-darken-3" href="#!" data-activates="dropdown_pakuesioner">PA/Kuesioner<i class="material-icons right">arrow_drop_down</i></a></li>
 						{{-- Closed menu --}}
 					</ul>
 					<ul class="right hide-on-med-and-down">
-						<li class="teal lighten-1"><a class="dropdown-button" href="#!" data-activates="dropdown_profile"><i class="material-icons left">person</i>5114100001</a></li>
+						<li class="teal lighten-1"><a class="dropdown-button" href="#!" data-activates="dropdown_profile"><i class="material-icons left">person</i>{{ Auth::user()->nrp }}</a></li>
 					</ul>
 
 					<ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
@@ -61,7 +61,7 @@
 						<li><a href="{{ url('/peserta/berkas') }}">Berkas</a></li>
 						<li><a href="{{ url('/peserta/pakuesioner') }}">PA/Kuesioner</a></li>
 						{{-- Closed menu--}}
-						<li><a href="{{ url('/') }}">Keluar</a></li>
+						<li><a href="{{ url('/logout') }}">Keluar</a></li>
 					</ul>
 
 					<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>

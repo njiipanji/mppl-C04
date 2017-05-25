@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'roles_id', 'name', 'username', 'email', 'password',
+        'roles_id', 'nrp', 'password',
     ];
 
     /**
@@ -29,17 +29,17 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class,'roles_id');
     }
 
-    public function roleIs($names)
+    public function roleIs($rolename)
     {
-        dd();
-        if ($this->roles->rolename == $names) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        dd($this->role);
+        // if ($this->role->rolename == $names) {
+        //     return true;
+        // }
+        // else {
+        //     return false;
+        // }
     }
 }

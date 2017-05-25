@@ -8,7 +8,7 @@
 	{{-- list menu --}}
 	<div class="row center" style="margin-top: 50px;">
 		<div class="col s12">
-			<a href="{{ url('peserta/isipa') }}" class="btn-large waves-effect waves-light">Isi PA Materi</a>
+			<a href="{{ url('peserta/pilihpa') }}" class="btn-large waves-effect waves-light">Isi PA Materi</a>
 		</div>
 	</div>
 	<div class="row center">

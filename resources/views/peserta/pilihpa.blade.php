@@ -5,22 +5,26 @@
 @section('title-page', 'Daftar PA')
 
 @section('content')
-	<div class="col s8 offset-s2" style="margin-top: 50px;">
+	<div class="col s12" style="margin-top: 50px;">
 		<table class="table highlight centered responsive-table">
 			<thead>
 				<tr>
-					<th>Materi 1</th>
-					<th>Materi 2</th>
-					<th>Materi 3</th>
-					<th>Materi 4</th>
+					@foreach($materis as $materi)
+						<th>{{ $materi->materi_nama }}</th>
+					@endforeach
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td><i class="material-icons" title="sudah diisi">done</i></td>
-					<td><a href="{{ url('peserta/isipa/2') }}"><i class="material-icons teal-text">mode_edit</i></a></td>
-					<td><a href="{{ url('peserta/isipa/3') }}"><i class="material-icons teal-text">mode_edit</i></a></td>
-					<td><a href="{{ url('peserta/isipa/4') }}"><i class="material-icons teal-text">mode_edit</i></a></td>
+					@foreach($materis as $materi)
+						@foreach($jawabs as $jawab)
+							@if($materi->materi_id == $jawab->fk_pa_jawab_pa)
+								<td title="Sudah diisi"><i class="material-icons teal-text">clear</i></td>
+							@else
+								<td title="Belum diisi"><a href="{{ url('peserta/isipa/'.$materi->materi_id) }}"><i class="material-icons teal-text">mode_edit</i></a></td>
+							@endif
+						@endforeach
+					@endforeach
 				</tr>
 			</tbody>
 		</table>

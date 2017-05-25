@@ -34,7 +34,7 @@
 				<li><a href="{{ url('/oc/registrasi') }}">Registrasi</a></li>
 			</ul>
 			<ul id="dropdown_profile" class="dropdown-content">
-				<li><a href="{{ url('/') }}">Logout</a></li>
+				<li><a href="{{ url('/logout') }}">Logout</a></li>
 			</ul>
 
 			{{-- navbar --}}
@@ -53,7 +53,7 @@
 						<li><a href="{{ url('/oc') }}">Home</a></li>
 						<li><a href="{{ url('/oc/checklist') }}">Checklist</a></li>
 						<li><a href="{{ url('/oc/registrasi') }}">Registrasi</a></li>
-						<li><a href="{{ url('/') }}">Keluar</a></li>
+						<li><a href="{{ url('/logout') }}">Keluar</a></li>
 					</ul>
 
 					<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons grey-text text-darken-3">menu</i></a>

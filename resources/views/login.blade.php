@@ -23,6 +23,10 @@
 					margin-left: 0px !important;
 				}
 			}
+			#toast-container {
+				top: 40% !important;
+				right: 20% !important;
+			}
 		</style>
 	</head>
 	<body>
@@ -44,15 +48,20 @@
 					<h3 style="font-weight: 600;">Halaman Login</h3>
 				</div>
 				<div class="row">
-					<form class="col s12">
+					<form class="col s12" action="/login" method="post">
+						{{ csrf_field() }}
 						<div class="row">
 							<div class="input-field col s6 offset-s3">
-								<input id="username" type="text" class="validate">
-								<label for="username">Username</label>
+								<input id="username" type="text" class="validate" name="username" required>
+								<label for="username">Username / NRP</label>
 							</div>
 							<div class="input-field col s6 offset-s3">
-								<input id="password" type="password" class="validate">
+								<input id="password" type="password" class="validate" name="password" required>
 								<label for="password">Password</label>
+							</div>
+							<div class="input-field col s6 offset-s3" style="margin-top: 0px; margin-bottom: 15px;">
+								<input id="remember" name="remember" type="checkbox">
+								<label for="remember">Ingat saya!</label>
 							</div>
 							<div class="input-field col s6 offset-s3 center">
 								<button class="btn waves-effect waves-light" type="submit" name="action">Masuk</button>
@@ -81,7 +90,10 @@
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 		<script type="text/javascript">
 			$( document ).ready(function(){
-				 $(".button-collapse").sideNav();
+				@if (session('error'))
+					Materialize.toast('{{ session('error') }}', 4000);
+				@endif
+				$(".button-collapse").sideNav();
 			})
 		</script>
 	</body>
