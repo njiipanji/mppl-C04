@@ -19,21 +19,38 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php
-				$id = 1;
-			?>
-				@foreach($pesertas as $peserta)
-					<tr>
-						<td>{{ $id }}</td>
-						<td>{{ $peserta->peserta_nrp }}</td>
-						<td>{{ $peserta->peserta_nama }}</td>
-						<td>{{ $peserta->fk_peserta_kelas }}</td>
-						<td>{{ $peserta->ceklis_waktu }}</td>
-						<td method="POST" action="/oc/checklist/{{ $peserta->peserta_nrp }}" accept-charset="UTF-8">
-						{{ csrf_field() }}
-						<a class="btn waves-effect waves-light" title="Checklist Peserta" style="height: 30px; line-height: 30px; padding: 0 1rem;" href="/oc/checklist/{{ $peserta->peserta_nrp }}">Cek!</i></a></td>
-					</tr>
-				@endforeach
+				<tr>
+					<td>1</td>
+					<td>511x100xxx</td>
+					<td>Aditya N.</td>
+					<td>1</td>
+					<td>-</td>
+					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>511x100xxx</td>
+					<td>Adinda P.</td>
+					<td>1</td>
+					<td>-</td>
+					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>511x100xxx</td>
+					<td>Ananda Q.</td>
+					<td>2</td>
+					<td>-</td>
+					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>511x100xxx</td>
+					<td>Bagus N.</td>
+					<td>3</td>
+					<td>-</td>
+					<td><a href="/oc/checklist/511x100xxx" class="btn waves-effect waves-light">Cek!</a></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
