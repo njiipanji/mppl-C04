@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Ceklis;
+use App\Models\Hari;
+use App\Models\Peserta;
 use Carbon\Carbon;
 use Auth;
 
@@ -24,7 +26,7 @@ class OCController extends Controller
 
     public function checklist()
     {
-        $pesertas = DB::select('SELECT p.peserta_nrp, p.peserta_nama,  p.fk_peserta_kelas, c.ceklis_waktu
+        $pesertas = DB::select('SELECT p.peserta_nrp, p.peserta_nama, p.fk_peserta_kelas, k.kelas_nama, c.ceklis_waktu
                                 FROM peserta p
                                 LEFT JOIN kelas k
                                 ON k.kelas_id = p.fk_peserta_kelas
@@ -39,30 +41,56 @@ class OCController extends Controller
         return view('oc.formchecklist', compact('nrp'));
     }
 
-    public function updatechecklist(Request $request)
+    public function inputchecklist(Request $request)
     {
-        // $ceklis_peserta = DB::select('SELECT c.*
-        //                         FROM ceklis c
-        //                         JOIN peserta p
-        //                         ON c.fk_ceklis_peserta = p.peserta_id'
-        //                         );
-        // $ceklis_hari =  DB::select('SELECT c.*
-        //                         FROM ceklis c
-        //                         JOIN hari h
-        //                         ON c.fk_ceklis_hari = h.hari'
-        //                         );
+        $peserta_nrp = Peserta::where('peserta_nrp', $request->nrp)->first();
+        //$waktu_registrasi = date('Y/m/d', strtotime($request->waktu_registrasi));
+
+        $timestamp = strtotime($request->waktu_registrasi);
+        $haris = date("d", $timestamp);
+        $queryhari = DB::select('select h.hari_id
+                                    from hari h
+                                    where day(h.hari) = '.$haris);
+
+        $harikegiatan = $queryhari['0']->hari_id;
+    
         $ceklis = new Ceklis;
-        $ceklis->ceklis_kemeja = $request->kemeja;
-        $ceklis->ceklis_almamater = $request->almamater;
-        $ceklis->ceklis_bawahan = $request->celrok;
-        $ceklis->ceklis_dasi = $request->dasi;
-        $ceklis->ceklis_ktm = $request->ktm;
-        $ceklis->ceklis_waktu = Carbon::now();
-        // $ceklis->fk_ceklis_peserta = $request-> $ceklis_peserta;
-        // $ceklis->fk_ceklis_hari = $request-> $ceklis_hari;
+        if($request->kemeja == 'on') {
+            $ceklis->ceklis_kemeja = 1;
+        } else {
+            $ceklis->ceklis_kemeja = 0;
+        }
+
+        if($request->almamater == 'on') {
+            $ceklis->ceklis_almamater = 1;
+        } else {
+            $ceklis->ceklis_almamater = 0;
+        }
+
+        if($request->celrok == 'on') {
+            $ceklis->ceklis_bawahan = 1;
+        } else {
+            $ceklis->ceklis_bawahan = 0;
+        }
+
+        if($request->dasi == 'on') {
+            $ceklis->ceklis_dasi = 1;
+        } else {
+            $ceklis->ceklis_dasi = 0;
+        }
+
+        if($request->ktm == 'on') {
+            $ceklis->ceklis_ktm = 1;
+        } else {
+            $ceklis->ceklis_ktm = 0;
+        }
+
+        $ceklis->ceklis_waktu = $request->waktu_registrasi;
+        $ceklis->fk_ceklis_peserta = $peserta_nrp->peserta_id;
+        $ceklis->fk_ceklis_hari = $harikegiatan;
         $ceklis->save();
 
-        return redirect('/oc/checklist')->with('alert-success','Checklist berhasil ditambah.');
+        return redirect('/oc/checklist')->with('sukses', 'Berhasil checklist');
     }
 
     public function registrasi()
